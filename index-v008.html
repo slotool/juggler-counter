@@ -12,7 +12,7 @@
     <link rel="manifest" href="./manifest.webmanifest">
     <link rel="apple-touch-icon" href="./icon.svg">
     <title>Juggler Counter</title>
-    <link rel="stylesheet" href="./styles.css?v=20260501-009">
+    <link rel="stylesheet" href="./styles.css?v=20260430-008">
   </head>
   <body>
     <main class="app-shell">
@@ -20,12 +20,9 @@
         <div>
           <p class="eyebrow">6号機ジャグラー対応</p>
           <h1>ジャグラー判別</h1>
-          <span class="version-badge">v2026.05.01-009</span>
+          <span class="version-badge">v2026.04.30-008</span>
         </div>
-        <div class="top-actions">
-          <div class="count-lamp" id="countLamp" aria-hidden="true"><span></span></div>
-          <button class="icon-button" id="resetAll" type="button" aria-label="全データをリセット">↺</button>
-        </div>
+        <button class="icon-button" id="resetAll" type="button" aria-label="全データをリセット">↺</button>
       </header>
 
       <section class="panel machine-panel">
@@ -57,9 +54,9 @@
                 <span>ゲーム数</span>
               </div>
               <div class="main-controls">
-                <button data-target="games" data-step="-100" type="button">-100</button>
+                <button data-target="games" data-step="-100" type="button">−100</button>
                 <input id="games" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-                <button data-target="games" data-step="100" type="button">+100</button>
+                <button data-target="games" data-step="100" type="button">＋100</button>
                 <button class="reset-one" data-reset="games" type="button">0</button>
               </div>
             </article>
@@ -69,9 +66,9 @@
                 <span id="bigQuickRate">--</span>
               </div>
               <div class="main-controls">
-                <button data-target="big" data-step="-1" type="button">-</button>
+                <button data-target="big" data-step="-1" type="button">−</button>
                 <input id="big" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-                <button data-target="big" data-step="1" type="button">+</button>
+                <button data-target="big" data-step="1" type="button">＋</button>
                 <button class="reset-one" data-reset="big" type="button">0</button>
               </div>
             </article>
@@ -81,9 +78,9 @@
                 <span id="regQuickRate">--</span>
               </div>
               <div class="main-controls">
-                <button data-target="reg" data-step="-1" type="button">-</button>
+                <button data-target="reg" data-step="-1" type="button">−</button>
                 <input id="reg" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-                <button data-target="reg" data-step="1" type="button">+</button>
+                <button data-target="reg" data-step="1" type="button">＋</button>
                 <button class="reset-one" data-reset="reg" type="button">0</button>
               </div>
             </article>
@@ -112,9 +109,9 @@
                 <span id="grapeRate">--</span>
               </div>
               <div class="stepper">
-                <button data-target="grape" data-step="-1" type="button">-</button>
+                <button data-target="grape" data-step="-1" type="button">−</button>
                 <input id="grape" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-                <button data-target="grape" data-step="1" type="button">+</button>
+                <button data-target="grape" data-step="1" type="button">＋</button>
               </div>
             </article>
             <article class="counter-card">
@@ -123,9 +120,9 @@
                 <span id="cherryRate">--</span>
               </div>
               <div class="stepper">
-                <button data-target="cherry" data-step="-1" type="button">-</button>
+                <button data-target="cherry" data-step="-1" type="button">−</button>
                 <input id="cherry" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-                <button data-target="cherry" data-step="1" type="button">+</button>
+                <button data-target="cherry" data-step="1" type="button">＋</button>
               </div>
             </article>
             <article class="counter-card">
@@ -134,9 +131,9 @@
                 <span id="singleBigRate">--</span>
               </div>
               <div class="stepper">
-                <button data-target="singleBig" data-step="-1" type="button">-</button>
+                <button data-target="singleBig" data-step="-1" type="button">−</button>
                 <input id="singleBig" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-                <button data-target="singleBig" data-step="1" type="button">+</button>
+                <button data-target="singleBig" data-step="1" type="button">＋</button>
               </div>
             </article>
             <article class="counter-card">
@@ -145,9 +142,9 @@
                 <span id="singleRegRate">--</span>
               </div>
               <div class="stepper">
-                <button data-target="singleReg" data-step="-1" type="button">-</button>
+                <button data-target="singleReg" data-step="-1" type="button">−</button>
                 <input id="singleReg" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-                <button data-target="singleReg" data-step="1" type="button">+</button>
+                <button data-target="singleReg" data-step="1" type="button">＋</button>
               </div>
             </article>
             <article class="counter-card">
@@ -156,9 +153,9 @@
                 <span id="cherryBigRate">--</span>
               </div>
               <div class="stepper">
-                <button data-target="cherryBig" data-step="-1" type="button">-</button>
+                <button data-target="cherryBig" data-step="-1" type="button">−</button>
                 <input id="cherryBig" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-                <button data-target="cherryBig" data-step="1" type="button">+</button>
+                <button data-target="cherryBig" data-step="1" type="button">＋</button>
               </div>
             </article>
             <article class="counter-card">
@@ -167,9 +164,9 @@
                 <span id="cherryRegRate">--</span>
               </div>
               <div class="stepper">
-                <button data-target="cherryReg" data-step="-1" type="button">-</button>
+                <button data-target="cherryReg" data-step="-1" type="button">−</button>
                 <input id="cherryReg" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-                <button data-target="cherryReg" data-step="1" type="button">+</button>
+                <button data-target="cherryReg" data-step="1" type="button">＋</button>
               </div>
             </article>
           </div>
@@ -253,6 +250,6 @@
         caches.keys().then((keys) => Promise.all(keys.map((key) => caches.delete(key)))).catch(() => {});
       }
     </script>
-    <script src="./app.js?v=20260501-009"></script>
+    <script src="./app.js?v=20260430-008"></script>
   </body>
 </html>

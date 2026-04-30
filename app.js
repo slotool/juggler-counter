@@ -1,18 +1,7 @@
 const SETTINGS = [1, 2, 3, 4, 5, 6];
 const STORAGE_KEY = "jugglerCounter.v1";
-let lastTouchEnd = 0;
-
-document.addEventListener("touchend", (event) => {
-  const now = Date.now();
-  if (now - lastTouchEnd <= 320) {
-    event.preventDefault();
-  }
-  lastTouchEnd = now;
-}, { passive: false });
-
-document.addEventListener("gesturestart", (event) => {
-  event.preventDefault();
-});
+let renderedMachineId = "";
+let lampTimer = 0;
 
 const machines = [
   {
@@ -214,6 +203,7 @@ const ids = ["games", "big", "reg", "grape", "cherry", "singleBig", "singleReg",
 const els = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
 const machineSelect = document.getElementById("machineSelect");
 const machineNote = document.getElementById("machineNote");
+const countLamp = document.getElementById("countLamp");
 
 let state = loadState();
 
@@ -404,43 +394,52 @@ function render() {
   const counts = Object.fromEntries(ids.map((id) => [id, toNum(els[id].value)]));
   updateRates(counts);
   updateJudge(machine, counts);
-  updateSpec(machine);
+  if (renderedMachineId !== machine.id) {
+    updateSpec(machine);
+    renderedMachineId = machine.id;
+  }
   saveState();
 }
 
 function bump(id, step) {
   const current = toNum(els[id].value);
   els[id].value = Math.max(0, current + step);
-  flashCounter(id);
+  flashLamp();
   if (navigator.vibrate) navigator.vibrate(18);
   render();
 }
 
-function flashCounter(id) {
-  const input = els[id];
-  const card = input?.closest(".counter-card, .main-counter-card");
-  const buttons = document.querySelectorAll(`[data-target="${id}"]`);
-  [card, ...buttons].filter(Boolean).forEach((element) => {
-    element.classList.remove("is-flashing");
-    void element.offsetWidth;
-    element.classList.add("is-flashing");
-  });
-  window.setTimeout(() => {
-    [card, ...buttons].filter(Boolean).forEach((element) => element.classList.remove("is-flashing"));
-  }, 620);
+function flashLamp() {
+  countLamp.classList.add("is-lit");
+  window.clearTimeout(lampTimer);
+  lampTimer = window.setTimeout(() => {
+    countLamp.classList.remove("is-lit");
+  }, 90);
+}
+
+function bindFastButton(button, action) {
+  if (window.PointerEvent) {
+    button.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      action();
+    });
+  } else {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      action();
+    });
+  }
 }
 
 document.querySelectorAll("[data-target]").forEach((button) => {
-  button.addEventListener("click", () => {
-    bump(button.dataset.target, Number(button.dataset.step));
-  });
+  bindFastButton(button, () => bump(button.dataset.target, Number(button.dataset.step)));
 });
 
 document.querySelectorAll("[data-reset]").forEach((button) => {
-  button.addEventListener("click", () => {
+  bindFastButton(button, () => {
     const id = button.dataset.reset;
     els[id].value = 0;
-    flashCounter(id);
+    flashLamp();
     render();
   });
 });
