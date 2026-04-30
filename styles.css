@@ -82,6 +82,18 @@ h1 {
   font-size: 1.92rem;
 }
 
+.version-badge {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 3px 7px;
+  border: 1px solid rgba(244, 201, 93, 0.28);
+  border-radius: 999px;
+  color: var(--gold);
+  background: rgba(244, 201, 93, 0.08);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
 h2 {
   font-size: 1.05rem;
 }
