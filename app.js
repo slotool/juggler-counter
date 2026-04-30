@@ -197,7 +197,7 @@ machines.forEach((machine) => {
   });
 });
 
-const ids = ["games", "big", "reg", "grape", "cherry", "singleBig", "singleReg", "cherryBig", "cherryReg", "pierrot", "bell"];
+const ids = ["games", "big", "reg", "grape", "cherry", "singleBig", "singleReg", "cherryBig", "cherryReg"];
 const els = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
 const machineSelect = document.getElementById("machineSelect");
 const machineNote = document.getElementById("machineNote");
@@ -302,8 +302,6 @@ function updateRates(counts) {
   document.getElementById("singleRegRate").textContent = rateText(counts.games, counts.singleReg);
   document.getElementById("cherryBigRate").textContent = rateText(counts.games, counts.cherryBig);
   document.getElementById("cherryRegRate").textContent = rateText(counts.games, counts.cherryReg);
-  document.getElementById("pierrotRate").textContent = rateText(counts.games, counts.pierrot);
-  document.getElementById("bellRate").textContent = rateText(counts.games, counts.bell);
   document.getElementById("grapeMetric").textContent = rateText(counts.games, counts.grape);
 }
 
@@ -398,7 +396,20 @@ function render() {
 function bump(id, step) {
   const current = toNum(els[id].value);
   els[id].value = Math.max(0, current + step);
+  flashCounter(id);
   render();
+}
+
+function flashCounter(id) {
+  const input = els[id];
+  const card = input?.closest(".counter-card");
+  if (!card) return;
+  card.classList.remove("is-flashing");
+  void card.offsetWidth;
+  card.classList.add("is-flashing");
+  window.setTimeout(() => {
+    card.classList.remove("is-flashing");
+  }, 280);
 }
 
 document.querySelectorAll("[data-target]").forEach((button) => {
@@ -422,7 +433,7 @@ document.querySelectorAll(".tab").forEach((tab) => {
 });
 
 document.getElementById("resetCounts").addEventListener("click", () => {
-  ["grape", "cherry", "singleBig", "singleReg", "cherryBig", "cherryReg", "pierrot", "bell"].forEach((id) => {
+  ["grape", "cherry", "singleBig", "singleReg", "cherryBig", "cherryReg"].forEach((id) => {
     els[id].value = 0;
   });
   render();

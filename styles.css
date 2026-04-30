@@ -243,6 +243,7 @@ select:focus {
 }
 
 .counter-card {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(98px, 1fr) minmax(160px, 1.2fr);
   gap: 10px;
@@ -252,6 +253,45 @@ select:focus {
   background: var(--panel-2);
   border: 1px solid var(--line);
   border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+.counter-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 72% 50%, rgba(244, 201, 93, 0.68), transparent 48%);
+  opacity: 0;
+  transform: scale(0.82);
+}
+
+.counter-card.is-flashing {
+  border-color: rgba(244, 201, 93, 0.95);
+  box-shadow: 0 0 0 2px rgba(244, 201, 93, 0.18), 0 0 24px rgba(244, 201, 93, 0.38);
+  transform: translateY(-1px);
+}
+
+.counter-card.is-flashing::after {
+  animation: flashPulse 260ms ease-out;
+}
+
+@keyframes flashPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.78);
+  }
+
+  35% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
 }
 
 .counter-card strong,

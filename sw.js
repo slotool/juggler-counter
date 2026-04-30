@@ -1,4 +1,4 @@
-const CACHE_NAME = "juggler-counter-v2";
+const CACHE_NAME = "juggler-counter-v4";
 const ASSETS = ["./", "./index.html", "./styles.css", "./app.js", "./manifest.webmanifest", "./icon.svg"];
 
 self.addEventListener("install", (event) => {
