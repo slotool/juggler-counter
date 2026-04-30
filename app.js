@@ -397,19 +397,22 @@ function bump(id, step) {
   const current = toNum(els[id].value);
   els[id].value = Math.max(0, current + step);
   flashCounter(id);
+  if (navigator.vibrate) navigator.vibrate(18);
   render();
 }
 
 function flashCounter(id) {
   const input = els[id];
   const card = input?.closest(".counter-card");
-  if (!card) return;
-  card.classList.remove("is-flashing");
-  void card.offsetWidth;
-  card.classList.add("is-flashing");
+  const buttons = document.querySelectorAll(`[data-target="${id}"]`);
+  [card, ...buttons].filter(Boolean).forEach((element) => {
+    element.classList.remove("is-flashing");
+    void element.offsetWidth;
+    element.classList.add("is-flashing");
+  });
   window.setTimeout(() => {
-    card.classList.remove("is-flashing");
-  }, 280);
+    [card, ...buttons].filter(Boolean).forEach((element) => element.classList.remove("is-flashing"));
+  }, 440);
 }
 
 document.querySelectorAll("[data-target]").forEach((button) => {

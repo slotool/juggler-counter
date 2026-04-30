@@ -230,10 +230,18 @@ select:focus {
   background: #303443;
   color: var(--text);
   font-weight: 900;
+  transition: filter 120ms ease, box-shadow 120ms ease, transform 120ms ease;
 }
 
 .count-button.glow {
   background: linear-gradient(180deg, #ff6875, #d93648);
+}
+
+.count-button.is-flashing,
+.stepper button.is-flashing {
+  filter: brightness(1.35);
+  box-shadow: 0 0 0 2px rgba(244, 201, 93, 0.38), 0 0 24px rgba(244, 201, 93, 0.78);
+  transform: scale(0.97);
 }
 
 .counter-list {
@@ -262,19 +270,37 @@ select:focus {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 72% 50%, rgba(244, 201, 93, 0.68), transparent 48%);
+  background:
+    linear-gradient(90deg, rgba(244, 201, 93, 0.28), transparent 34%),
+    radial-gradient(circle at 76% 50%, rgba(244, 201, 93, 0.92), transparent 54%);
   opacity: 0;
   transform: scale(0.82);
 }
 
+.counter-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: var(--gold);
+  opacity: 0;
+  box-shadow: 0 0 22px rgba(244, 201, 93, 0.95);
+}
+
 .counter-card.is-flashing {
   border-color: rgba(244, 201, 93, 0.95);
-  box-shadow: 0 0 0 2px rgba(244, 201, 93, 0.18), 0 0 24px rgba(244, 201, 93, 0.38);
+  box-shadow: 0 0 0 2px rgba(244, 201, 93, 0.30), 0 0 30px rgba(244, 201, 93, 0.70);
   transform: translateY(-1px);
 }
 
+.counter-card.is-flashing::before {
+  animation: flashEdge 420ms ease-out;
+}
+
 .counter-card.is-flashing::after {
-  animation: flashPulse 260ms ease-out;
+  animation: flashPulse 420ms ease-out;
 }
 
 @keyframes flashPulse {
@@ -283,7 +309,7 @@ select:focus {
     transform: scale(0.78);
   }
 
-  35% {
+  25% {
     opacity: 1;
     transform: scale(1);
   }
@@ -291,6 +317,20 @@ select:focus {
   100% {
     opacity: 0;
     transform: scale(1.18);
+  }
+}
+
+@keyframes flashEdge {
+  0% {
+    opacity: 0;
+  }
+
+  22% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
 
