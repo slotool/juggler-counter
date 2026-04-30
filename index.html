@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#111217">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Juggler">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="apple-touch-icon" href="./icon.svg">
+    <title>Juggler Counter</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">6号機ジャグラー対応</p>
+          <h1>ジャグラー判別</h1>
+        </div>
+        <button class="icon-button" id="resetAll" type="button" aria-label="全データをリセット">↺</button>
+      </header>
+
+      <section class="panel machine-panel">
+        <label class="field-label" for="machineSelect">機種</label>
+        <select id="machineSelect"></select>
+        <p class="machine-note" id="machineNote"></p>
+      </section>
+
+      <nav class="tabs" aria-label="表示切替">
+        <button class="tab is-active" data-tab="counter" type="button">カウント</button>
+        <button class="tab" data-tab="judge" type="button">設定判別</button>
+        <button class="tab" data-tab="spec" type="button">スペック</button>
+      </nav>
+
+      <section class="tab-page is-active" id="counterPage">
+        <div class="panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Play Data</p>
+              <h2>回転数とボーナス</h2>
+            </div>
+            <button class="mini-button" id="saveMemo" type="button">保存</button>
+          </div>
+
+          <div class="number-grid">
+            <label class="number-field">
+              <span>総回転</span>
+              <input id="games" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+            </label>
+            <label class="number-field">
+              <span>BIG</span>
+              <input id="big" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+            </label>
+            <label class="number-field">
+              <span>REG</span>
+              <input id="reg" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+            </label>
+          </div>
+
+          <div class="quick-row">
+            <button class="count-button glow" data-target="big" data-step="1" type="button">BIG +1</button>
+            <button class="count-button glow" data-target="reg" data-step="1" type="button">REG +1</button>
+            <button class="count-button" data-target="games" data-step="100" type="button">+100G</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Small Roles</p>
+              <h2>子役カウント</h2>
+            </div>
+            <button class="mini-button" id="resetCounts" type="button">子役リセット</button>
+          </div>
+
+          <div class="counter-list">
+            <article class="counter-card">
+              <div>
+                <strong>ブドウ</strong>
+                <span id="grapeRate">--</span>
+              </div>
+              <div class="stepper">
+                <button data-target="grape" data-step="-1" type="button">−</button>
+                <input id="grape" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="grape" data-step="1" type="button">＋</button>
+              </div>
+            </article>
+            <article class="counter-card">
+              <div>
+                <strong>チェリー</strong>
+                <span id="cherryRate">--</span>
+              </div>
+              <div class="stepper">
+                <button data-target="cherry" data-step="-1" type="button">−</button>
+                <input id="cherry" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="cherry" data-step="1" type="button">＋</button>
+              </div>
+            </article>
+            <article class="counter-card">
+              <div>
+                <strong>単独BIG</strong>
+                <span id="singleBigRate">--</span>
+              </div>
+              <div class="stepper">
+                <button data-target="singleBig" data-step="-1" type="button">−</button>
+                <input id="singleBig" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="singleBig" data-step="1" type="button">＋</button>
+              </div>
+            </article>
+            <article class="counter-card">
+              <div>
+                <strong>単独REG</strong>
+                <span id="singleRegRate">--</span>
+              </div>
+              <div class="stepper">
+                <button data-target="singleReg" data-step="-1" type="button">−</button>
+                <input id="singleReg" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="singleReg" data-step="1" type="button">＋</button>
+              </div>
+            </article>
+            <article class="counter-card">
+              <div>
+                <strong>チェリー+BIG</strong>
+                <span id="cherryBigRate">--</span>
+              </div>
+              <div class="stepper">
+                <button data-target="cherryBig" data-step="-1" type="button">−</button>
+                <input id="cherryBig" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="cherryBig" data-step="1" type="button">＋</button>
+              </div>
+            </article>
+            <article class="counter-card">
+              <div>
+                <strong>チェリー+REG</strong>
+                <span id="cherryRegRate">--</span>
+              </div>
+              <div class="stepper">
+                <button data-target="cherryReg" data-step="-1" type="button">−</button>
+                <input id="cherryReg" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="cherryReg" data-step="1" type="button">＋</button>
+              </div>
+            </article>
+            <article class="counter-card compact">
+              <div>
+                <strong>ピエロ</strong>
+                <span id="pierrotRate">--</span>
+              </div>
+              <div class="stepper">
+                <button data-target="pierrot" data-step="-1" type="button">−</button>
+                <input id="pierrot" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="pierrot" data-step="1" type="button">＋</button>
+              </div>
+            </article>
+            <article class="counter-card compact">
+              <div>
+                <strong>ベル</strong>
+                <span id="bellRate">--</span>
+              </div>
+              <div class="stepper">
+                <button data-target="bell" data-step="-1" type="button">−</button>
+                <input id="bell" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="bell" data-step="1" type="button">＋</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-page" id="judgePage">
+        <div class="result-hero">
+          <p>推定設定</p>
+          <strong id="bestSetting">--</strong>
+          <span id="confidenceLabel">データ待ち</span>
+        </div>
+
+        <div class="panel">
+          <div class="metric-grid">
+            <div><span>合算</span><strong id="totalRate">--</strong></div>
+            <div><span>BIG</span><strong id="bigRate">--</strong></div>
+            <div><span>REG</span><strong id="regRate">--</strong></div>
+            <div><span>ブドウ</span><strong id="grapeMetric">--</strong></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Probability</p>
+              <h2>設定期待度</h2>
+            </div>
+            <span class="sample-badge" id="sampleBadge">0G</span>
+          </div>
+          <div class="prob-list" id="probList"></div>
+          <p class="hint" id="judgeHint"></p>
+        </div>
+      </section>
+
+      <section class="tab-page" id="specPage">
+        <div class="panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Machine Spec</p>
+              <h2>設定別スペック</h2>
+            </div>
+          </div>
+          <div class="spec-table-wrap">
+            <table class="spec-table">
+              <thead>
+                <tr>
+                  <th>設定</th>
+                  <th>BIG</th>
+                  <th>REG</th>
+                  <th>合算</th>
+                  <th>ブドウ</th>
+                  <th>機械割</th>
+                </tr>
+              </thead>
+              <tbody id="specBody"></tbody>
+            </table>
+          </div>
+          <p class="hint">掲載値は解析サイトの公表・独自調査値をもとにした推測用データです。実戦結果や収支を保証するものではありません。</p>
+        </div>
+
+        <div class="panel">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Judge Points</p>
+              <h2>設定差の大きい判別要素</h2>
+            </div>
+          </div>
+          <div class="factor-list" id="factorList"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
