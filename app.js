@@ -203,7 +203,8 @@ const ids = ["games", "big", "reg", "grape", "cherry", "singleBig", "singleReg",
 const els = Object.fromEntries(ids.map((id) => [id, document.getElementById(id)]));
 const machineSelect = document.getElementById("machineSelect");
 const machineNote = document.getElementById("machineNote");
-const countLamp = document.getElementById("countLamp");
+const mainLamp = document.getElementById("mainLamp");
+const roleLamp = document.getElementById("roleLamp");
 
 let state = loadState();
 
@@ -404,16 +405,17 @@ function render() {
 function bump(id, step) {
   const current = toNum(els[id].value);
   els[id].value = Math.max(0, current + step);
-  flashLamp();
+  flashLamp(id);
   if (navigator.vibrate) navigator.vibrate(18);
   render();
 }
 
-function flashLamp() {
-  countLamp.classList.add("is-lit");
+function flashLamp(id) {
+  const lamp = ["games", "big", "reg"].includes(id) ? mainLamp : roleLamp;
+  lamp.classList.add("is-lit");
   window.clearTimeout(lampTimer);
   lampTimer = window.setTimeout(() => {
-    countLamp.classList.remove("is-lit");
+    lamp.classList.remove("is-lit");
   }, 90);
 }
 
@@ -439,7 +441,7 @@ document.querySelectorAll("[data-reset]").forEach((button) => {
   bindFastButton(button, () => {
     const id = button.dataset.reset;
     els[id].value = 0;
-    flashLamp();
+    flashLamp(id);
     render();
   });
 });

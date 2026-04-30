@@ -81,15 +81,17 @@ button {
   margin-bottom: 18px;
 }
 
-.top-actions {
+.section-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 .count-lamp {
-  width: 54px;
-  height: 54px;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
   display: grid;
   place-items: center;
   border-radius: 50%;
@@ -99,8 +101,8 @@ button {
 }
 
 .count-lamp span {
-  width: 30px;
-  height: 30px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   background: #574528;
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.45);
@@ -711,6 +713,16 @@ select:focus {
   .main-controls button {
     min-height: 38px;
     font-size: 0.78rem;
+  }
+
+  .count-lamp {
+    width: 34px;
+    height: 34px;
+  }
+
+  .count-lamp span {
+    width: 19px;
+    height: 19px;
   }
 
   .quick-row {
