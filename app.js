@@ -1,5 +1,18 @@
 const SETTINGS = [1, 2, 3, 4, 5, 6];
 const STORAGE_KEY = "jugglerCounter.v1";
+let lastTouchEnd = 0;
+
+document.addEventListener("touchend", (event) => {
+  const now = Date.now();
+  if (now - lastTouchEnd <= 320) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, { passive: false });
+
+document.addEventListener("gesturestart", (event) => {
+  event.preventDefault();
+});
 
 const machines = [
   {

@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#111217">
     <meta http-equiv="Cache-Control" content="no-store">
     <meta http-equiv="Pragma" content="no-cache">
@@ -12,7 +12,7 @@
     <link rel="manifest" href="./manifest.webmanifest">
     <link rel="apple-touch-icon" href="./icon.svg">
     <title>Juggler Counter</title>
-    <link rel="stylesheet" href="./styles.css?v=20260430-007">
+    <link rel="stylesheet" href="./styles.css?v=20260430-008">
   </head>
   <body>
     <main class="app-shell">
@@ -20,7 +20,7 @@
         <div>
           <p class="eyebrow">6号機ジャグラー対応</p>
           <h1>ジャグラー判別</h1>
-          <span class="version-badge">v2026.04.30-007</span>
+          <span class="version-badge">v2026.04.30-008</span>
         </div>
         <button class="icon-button" id="resetAll" type="button" aria-label="全データをリセット">↺</button>
       </header>
@@ -250,6 +250,6 @@
         caches.keys().then((keys) => Promise.all(keys.map((key) => caches.delete(key)))).catch(() => {});
       }
     </script>
-    <script src="./app.js?v=20260430-007"></script>
+    <script src="./app.js?v=20260430-008"></script>
   </body>
 </html>
