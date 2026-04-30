@@ -296,6 +296,8 @@ function updateRates(counts) {
   document.getElementById("totalRate").textContent = rateText(counts.games, counts.big + counts.reg);
   document.getElementById("bigRate").textContent = rateText(counts.games, counts.big);
   document.getElementById("regRate").textContent = rateText(counts.games, counts.reg);
+  document.getElementById("bigQuickRate").textContent = rateText(counts.games, counts.big);
+  document.getElementById("regQuickRate").textContent = rateText(counts.games, counts.reg);
   document.getElementById("grapeRate").textContent = rateText(counts.games, counts.grape);
   document.getElementById("cherryRate").textContent = rateText(counts.games, counts.cherry);
   document.getElementById("singleBigRate").textContent = rateText(counts.games, counts.singleBig);
@@ -403,7 +405,7 @@ function bump(id, step) {
 
 function flashCounter(id) {
   const input = els[id];
-  const card = input?.closest(".counter-card");
+  const card = input?.closest(".counter-card, .main-counter-card");
   const buttons = document.querySelectorAll(`[data-target="${id}"]`);
   [card, ...buttons].filter(Boolean).forEach((element) => {
     element.classList.remove("is-flashing");
@@ -412,12 +414,21 @@ function flashCounter(id) {
   });
   window.setTimeout(() => {
     [card, ...buttons].filter(Boolean).forEach((element) => element.classList.remove("is-flashing"));
-  }, 440);
+  }, 620);
 }
 
 document.querySelectorAll("[data-target]").forEach((button) => {
   button.addEventListener("click", () => {
     bump(button.dataset.target, Number(button.dataset.step));
+  });
+});
+
+document.querySelectorAll("[data-reset]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const id = button.dataset.reset;
+    els[id].value = 0;
+    flashCounter(id);
+    render();
   });
 });
 
@@ -457,8 +468,10 @@ document.getElementById("saveMemo").addEventListener("click", (event) => {
   }, 900);
 });
 
-if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
-  navigator.serviceWorker.register("./sw.js").catch(() => {});
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations?.().then((registrations) => {
+    registrations.forEach((registration) => registration.unregister());
+  }).catch(() => {});
 }
 
 updateMachineOptions();

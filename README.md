@@ -10,7 +10,7 @@
 - 設定差の大きい要素を機種別に表示
 - iPhone縦向き・横向きレイアウト対応
 - localStorageによる端末内保存
-- PWA用manifestとService Worker同梱
+- PWA用manifest同梱
 
 ## Usage
 

@@ -213,6 +213,57 @@ select:focus {
   margin-top: 14px;
 }
 
+.main-counter-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.main-counter-card {
+  display: grid;
+  grid-template-columns: minmax(72px, 0.58fr) minmax(190px, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.main-counter-card strong,
+.main-counter-card span {
+  display: block;
+}
+
+.main-counter-card strong {
+  margin-bottom: 4px;
+}
+
+.main-counter-card span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.main-controls {
+  display: grid;
+  grid-template-columns: 52px minmax(64px, 1fr) 52px 40px;
+  gap: 6px;
+}
+
+.main-controls button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 8px;
+  background: #383d4e;
+  color: var(--text);
+  font-weight: 900;
+}
+
+.main-controls .reset-one {
+  background: #272b38;
+  color: var(--gold);
+}
+
 .number-field {
   display: grid;
   gap: 6px;
@@ -238,9 +289,12 @@ select:focus {
 }
 
 .count-button.is-flashing,
-.stepper button.is-flashing {
-  filter: brightness(1.35);
-  box-shadow: 0 0 0 2px rgba(244, 201, 93, 0.38), 0 0 24px rgba(244, 201, 93, 0.78);
+.stepper button.is-flashing,
+.main-controls button.is-flashing {
+  color: #111217;
+  background: #fff3a4;
+  filter: brightness(1.08);
+  box-shadow: 0 0 0 3px rgba(255, 243, 164, 0.72), 0 0 28px rgba(255, 243, 164, 0.95);
   transform: scale(0.97);
 }
 
@@ -290,9 +344,27 @@ select:focus {
 }
 
 .counter-card.is-flashing {
+  color: #111217;
+  background: #f4c95d;
   border-color: rgba(244, 201, 93, 0.95);
-  box-shadow: 0 0 0 2px rgba(244, 201, 93, 0.30), 0 0 30px rgba(244, 201, 93, 0.70);
+  box-shadow: 0 0 0 3px rgba(255, 243, 164, 0.72), 0 0 34px rgba(255, 243, 164, 0.95);
   transform: translateY(-1px);
+}
+
+.counter-card.is-flashing strong,
+.counter-card.is-flashing span {
+  color: #111217;
+}
+
+.counter-card.is-flashing input {
+  color: #111217;
+  background: #fff8cf;
+  border-color: rgba(17, 18, 23, 0.28);
+}
+
+.counter-card.is-flashing .stepper button {
+  color: #111217;
+  background: #fff3a4;
 }
 
 .counter-card.is-flashing::before {
@@ -569,6 +641,10 @@ select:focus {
     grid-template-columns: 1fr;
   }
 
+  .main-counter-card {
+    grid-template-columns: 1fr;
+  }
+
   .counter-card {
     grid-template-columns: 1fr;
   }
@@ -637,6 +713,35 @@ select:focus {
     grid-template-columns: 1fr;
     gap: 8px;
     margin-top: 10px;
+  }
+
+  .main-counter-list {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .main-counter-card {
+    grid-template-columns: minmax(64px, 0.5fr) minmax(188px, 1fr);
+    min-height: 58px;
+    padding: 8px;
+  }
+
+  .main-counter-card strong {
+    font-size: 0.82rem;
+  }
+
+  .main-counter-card span {
+    font-size: 0.7rem;
+  }
+
+  .main-controls {
+    grid-template-columns: 48px minmax(62px, 1fr) 48px 36px;
+    gap: 5px;
+  }
+
+  .main-controls button {
+    min-height: 38px;
+    font-size: 0.78rem;
   }
 
   .quick-row {

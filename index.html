@@ -43,19 +43,43 @@
             <button class="mini-button" id="saveMemo" type="button">保存</button>
           </div>
 
-          <div class="number-grid">
-            <label class="number-field">
-              <span>総回転</span>
-              <input id="games" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-            </label>
-            <label class="number-field">
-              <span>BIG</span>
-              <input id="big" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-            </label>
-            <label class="number-field">
-              <span>REG</span>
-              <input id="reg" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
-            </label>
+          <div class="main-counter-list">
+            <article class="main-counter-card">
+              <div>
+                <strong>総回転</strong>
+                <span>ゲーム数</span>
+              </div>
+              <div class="main-controls">
+                <button data-target="games" data-step="-100" type="button">−100</button>
+                <input id="games" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="games" data-step="100" type="button">＋100</button>
+                <button class="reset-one" data-reset="games" type="button">0</button>
+              </div>
+            </article>
+            <article class="main-counter-card">
+              <div>
+                <strong>BIG</strong>
+                <span id="bigQuickRate">--</span>
+              </div>
+              <div class="main-controls">
+                <button data-target="big" data-step="-1" type="button">−</button>
+                <input id="big" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="big" data-step="1" type="button">＋</button>
+                <button class="reset-one" data-reset="big" type="button">0</button>
+              </div>
+            </article>
+            <article class="main-counter-card">
+              <div>
+                <strong>REG</strong>
+                <span id="regQuickRate">--</span>
+              </div>
+              <div class="main-controls">
+                <button data-target="reg" data-step="-1" type="button">−</button>
+                <input id="reg" inputmode="numeric" pattern="[0-9]*" type="number" min="0" value="0">
+                <button data-target="reg" data-step="1" type="button">＋</button>
+                <button class="reset-one" data-reset="reg" type="button">0</button>
+              </div>
+            </article>
           </div>
 
           <div class="quick-row">
